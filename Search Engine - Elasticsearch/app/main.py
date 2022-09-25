@@ -5,7 +5,6 @@ from fastapi.templating import Jinja2Templates
 from elasticsearch import Elasticsearch
 
 app = FastAPI()
-templates = Jinja2Templates(directory="./templates")
 es = Elasticsearch({
         "scheme": "http",
         "host": "localhost",
