@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine - Elasticsearch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form >
+            <input type="text" id="searchbox" placeholder="What are you looking for ?">
+            <button type="button" id="button">Search</button>
+        </form>
+    </div>
+    <div class="container2">
+        <div id="results"></div>
+    <script>
+        const searchbox = document.getElementById("searchbox");
+        const button = document.getElementById("button");
+        var results = document.getElementById("results");
+        const search = async() => {
+            const response = await fetch('http://localhost:8000/search/' + searchbox.value);
+            const myJson = await response.json();
+           if (Object.keys(myJson).length === 0) {
+                results.innerHTML += "No results found";
+            }
+            else{
+                results.innerHTML = "";
+                for (var i = 0; i < myJson.length; i++){
+                    results.innerHTML += "<div class = 'res'> <a href=" + 'https://www.flickr.com/photos/' + myJson[i]['_source']['userid'] + '/' + 
+                    myJson[i]['_source']['id'] + " target = '_blanck'>" + myJson[i]['_source']['title'] + "</a></div><br>";
+                }
+            }
+        }
+        button.addEventListener("click", search);
+    </script>
+</body>
+</html>
