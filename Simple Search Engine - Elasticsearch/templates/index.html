@@ -23,14 +23,15 @@
         const search = async() => {
             const response = await fetch('http://localhost:8000/search/' + searchbox.value);
             const myJson = await response.json();
-           if (Object.keys(myJson).length === 0) {
+            if (Object.keys(myJson).length === 0) {
                 results.innerHTML += "No results found";
             }
             else{
                 results.innerHTML = "";
                 for (var i = 0; i < myJson.length; i++){
-                    results.innerHTML += "<div class = 'res'> <a href=" + 'https://www.flickr.com/photos/' + myJson[i]['_source']['userid'] + '/' + 
-                    myJson[i]['_source']['id'] + " target = '_blanck'>" + myJson[i]['_source']['title'] + "</a></div><br>";
+                    //<a data-flickr-embed="true" href="https://www.flickr.com/photos/31714338@N07/6933154637" title="tunis sheep"><img src="https://live.staticflickr.com/7201/6933154637_b3989c7313_3k.jpg" width="2672" height="1767" alt="tunis sheep"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+                    results.innerHTML += "<div class = 'res'><a data-flickr-embed = 'true' href=" + 'https://www.flickr.com/photos/' + myJson[i]['_source']['userid'] + '/' + 
+                    myJson[i]['_source']['id'] + ">" + myJson[i]['_source']['title']  "</a></div><br>";
                 }
             }
         }
