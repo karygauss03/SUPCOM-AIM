@@ -1,7 +1,5 @@
-from fastapi import FastAPI, Request
-import requests
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.templating import Jinja2Templates
 from elasticsearch import Elasticsearch
 
 app = FastAPI()
